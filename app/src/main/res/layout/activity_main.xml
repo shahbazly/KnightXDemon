@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/backgroundThemeImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/forest_background"
+        app:layout_constraintBottom_toTopOf="@+id/horizontalCenterGuideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="contentDescription" />
+
+    <ImageView
+        android:id="@+id/knightImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="18dp"
+        android:scaleX="1.2"
+        android:scaleY="1.2"
+        app:layout_constraintBottom_toTopOf="@+id/horizontalCenterGuideline"
+        app:layout_constraintEnd_toStartOf="@+id/verticalCenterGuideline"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="contentDescription"
+        tools:layout_height="50dp"
+        tools:layout_width="50dp" />
+
+    <ImageView
+        android:id="@+id/demonImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:scaleX="1.2"
+        android:scaleY="1.2"
+        app:layout_constraintBottom_toTopOf="@+id/horizontalCenterGuideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/verticalCenterGuideline"
+        tools:ignore="contentDescription"
+        tools:layout_height="50dp"
+        tools:layout_width="50dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/horizontalCenterGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/verticalCenterGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
