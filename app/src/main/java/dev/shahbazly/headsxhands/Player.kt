@@ -1,18 +1,16 @@
 package dev.shahbazly.headsxhands
 
 import android.graphics.drawable.AnimationDrawable
-import android.util.Log
 import android.widget.ImageView
-import java.util.logging.Handler
 
 class Player(
-    override val avatar: ImageView,
-    override val name: String,
-    override var attack: Int,
-    override var defense: Int,
-    override var health: Int,
-    override val damage: Int
-): Creature() {
+    name: String,
+    private val avatar: ImageView,
+    attack: Int,
+    defense: Int,
+    health: Int,
+    damage: IntRange
+) : Creature(name, attack, defense, health, damage) {
 
     init {
         setCreatureState(CreatureState.IDLE)

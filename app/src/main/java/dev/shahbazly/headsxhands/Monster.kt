@@ -4,13 +4,13 @@ import android.graphics.drawable.AnimationDrawable
 import android.widget.ImageView
 
 class Monster(
-    override val name: String,
-    override val avatar: ImageView,
-    override var attack: Int,
-    override var defense: Int,
-    override var health: Int,
-    override val damage: Int
-) : Creature() {
+    name: String,
+    val avatar: ImageView,
+    attack: Int,
+    defense: Int,
+    health: Int,
+    damage: IntRange
+) : Creature(name, attack, defense, health, damage) {
 
     init {
         setCreatureState(CreatureState.IDLE)
