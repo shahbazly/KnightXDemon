@@ -49,8 +49,8 @@ abstract class Creature(
         if (damage > 0) {
             health -= damage
             if (health <= 0) {
-                setCreatureState(DIE)
                 health = 0
+                setCreatureState(DIE)
             } else {
                 setCreatureState(TAKE_HIT)
             }
@@ -69,4 +69,6 @@ abstract class Creature(
     fun printHealth() {
         Log.e(name,"health: $health")
     }
+
+    fun getHealth() = this.health
 }

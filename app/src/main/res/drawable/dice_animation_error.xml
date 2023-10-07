@@ -12,11 +12,5 @@
     <item android:drawable="@drawable/dice_anim_4" android:duration="50" />
     <item android:drawable="@drawable/dice_anim_5" android:duration="50" />
     <item android:drawable="@drawable/dice_anim_6" android:duration="50" />
-    <item android:drawable="@drawable/dice_anim_1" android:duration="50" />
-    <item android:drawable="@drawable/dice_anim_2" android:duration="50" />
-    <item android:drawable="@drawable/dice_anim_3" android:duration="50" />
-    <item android:drawable="@drawable/dice_anim_4" android:duration="50" />
-    <item android:drawable="@drawable/dice_anim_5" android:duration="50" />
-    <item android:drawable="@drawable/dice_anim_6" android:duration="50" />
     <item android:drawable="@drawable/dice_result_error" android:duration="50" />
 </animation-list>

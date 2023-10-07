@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.flexbox.FlexboxLayout
 
@@ -26,11 +27,30 @@ class MainActivity : AppCompatActivity() {
         knightDiceContainer = findViewById(R.id.playerDicesLayout)
         demonDiceContainer = findViewById(R.id.monsterDicesLayout)
 
-        val knight = Player(name = "Knight", avatar = knightImage, attack = 20, defense = 16, health = 100, damage = 15..20)
-        val demon = Monster(name = "Demon", avatar = demonImage, attack = 15, defense = 15, health = 100, damage = 10..15)
-
         val demonAttackButton = findViewById<Button>(R.id.demonAttackButton)
         val knightAttackButton = findViewById<Button>(R.id.knightAttackButton)
+
+        val knightHealthBar = findViewById<ProgressBar>(R.id.playerHealthProgressBar)
+        val demonAHealthBar = findViewById<ProgressBar>(R.id.monsterHealthProgressBar)
+
+        val knight = Player(
+            name = "Knight",
+            avatar = knightImage,
+            healthBar = knightHealthBar,
+            attack = 30,
+            defense = 30,
+            health = 50,
+            damage = 15..20
+        )
+        val demon = Monster(
+            name = "Demon",
+            avatar = demonImage,
+            healthBar = demonAHealthBar,
+            attack = 30,
+            defense = 30,
+            health = 50,
+            damage = 15..20
+        )
 
         demonAttackButton.setOnClickListener {
             demonDiceContainer.removeAllViews()
@@ -51,6 +71,7 @@ class MainActivity : AppCompatActivity() {
 
             Log.e("knight", "knight dices: $dice")
             knightAttackButton.isClickable = false
+
             demonAttackButton.isClickable = demon.isAlive()
         }
 
@@ -60,14 +81,17 @@ class MainActivity : AppCompatActivity() {
         diceResults.forEach { diceResult ->
             val diceImage = ImageView(this)
 
-            val layoutParams = FlexboxLayout.LayoutParams(FlexboxLayout.LayoutParams.WRAP_CONTENT,FlexboxLayout.LayoutParams.WRAP_CONTENT)
-            layoutParams.setMargins(48,48,48,48)
+            val layoutParams = FlexboxLayout.LayoutParams(
+                FlexboxLayout.LayoutParams.WRAP_CONTENT,
+                FlexboxLayout.LayoutParams.WRAP_CONTENT
+            )
+            layoutParams.setMargins(48, 48, 48, 48)
             diceImage.layoutParams = layoutParams
 
             diceImage.scaleX = 2.5f
             diceImage.scaleY = 2.5f
             diceImage.setImageResource(
-                when(diceResult) {
+                when (diceResult) {
                     1 -> R.drawable.dice_animation_1
                     2 -> R.drawable.dice_animation_2
                     3 -> R.drawable.dice_animation_3

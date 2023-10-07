@@ -2,10 +2,12 @@ package dev.shahbazly.headsxhands
 
 import android.graphics.drawable.AnimationDrawable
 import android.widget.ImageView
+import android.widget.ProgressBar
 
 class Monster(
     name: String,
-    val avatar: ImageView,
+    private val avatar: ImageView,
+    private val healthBar: ProgressBar,
     attack: Int,
     defense: Int,
     health: Int,
@@ -13,6 +15,7 @@ class Monster(
 ) : Creature(name, attack, defense, health, damage) {
 
     init {
+        healthBar.max = health
         setCreatureState(CreatureState.IDLE)
     }
     override fun setCreatureState(newState: CreatureState) = when (newState) {
@@ -41,6 +44,7 @@ class Monster(
             creatureAnimation.callback =
                 object : AnimationDrawableCallback(creatureAnimation, avatar) {
                     override fun onAnimationComplete() {
+                        healthBar.progress = getHealth()
                         creatureAnimation.stop()
                         avatar.setBackgroundResource(R.drawable.demon_idle_animation)
                         val anim = avatar.background as AnimationDrawable
@@ -50,6 +54,7 @@ class Monster(
             creatureAnimation.start()
         }
         CreatureState.DIE -> {
+            healthBar.progress = getHealth()
             avatar.setBackgroundResource(R.drawable.demon_death_animation)
             val creatureAnimation = avatar.background as AnimationDrawable
             creatureAnimation.start()
