@@ -26,6 +26,7 @@
         android:scaleY="1.2"
         app:layout_constraintBottom_toTopOf="@+id/horizontalCenterGuideline"
         app:layout_constraintEnd_toStartOf="@+id/verticalCenterGuideline"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="contentDescription"
         tools:layout_height="50dp"
@@ -40,6 +41,7 @@
         android:scaleY="1.2"
         app:layout_constraintBottom_toTopOf="@+id/horizontalCenterGuideline"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/verticalCenterGuideline"
         tools:ignore="contentDescription"
         tools:layout_height="50dp"
@@ -58,5 +60,25 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.5" />
+
+    <Button
+        android:id="@+id/knightAttackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Attack"
+        app:layout_constraintEnd_toStartOf="@+id/verticalCenterGuideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/horizontalCenterGuideline" />
+
+    <Button
+        android:id="@+id/demonAttackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Attack"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/verticalCenterGuideline"
+        app:layout_constraintTop_toTopOf="@+id/horizontalCenterGuideline" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
