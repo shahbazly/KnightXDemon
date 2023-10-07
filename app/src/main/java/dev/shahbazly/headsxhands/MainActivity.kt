@@ -26,14 +26,14 @@ class MainActivity : AppCompatActivity() {
         knightDiceContainer = findViewById(R.id.playerDicesLayout)
         demonDiceContainer = findViewById(R.id.monsterDicesLayout)
 
-        val knight = Player(name = "Knight", avatar = demonImage, attack = 20, defense = 16, health = 100, damage = 15..20)
-        val demon = Monster(name = "Demon", avatar = knightImage, attack = 15, defense = 15, health = 100, damage = 10..15)
+        val knight = Player(name = "Knight", avatar = knightImage, attack = 20, defense = 16, health = 100, damage = 15..20)
+        val demon = Monster(name = "Demon", avatar = demonImage, attack = 15, defense = 15, health = 100, damage = 10..15)
 
         val demonAttackButton = findViewById<Button>(R.id.demonAttackButton)
         val knightAttackButton = findViewById<Button>(R.id.knightAttackButton)
 
         demonAttackButton.setOnClickListener {
-            knightDiceContainer.removeAllViews()
+            demonDiceContainer.removeAllViews()
 
             val dice = demon.attack(knight)
             animateDices(demonDiceContainer, dice)
