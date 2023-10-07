@@ -1,0 +1,18 @@
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="true">
+    <item android:drawable="@drawable/demon_cleave_1" android:duration="75" />
+    <item android:drawable="@drawable/demon_cleave_2" android:duration="75" />
+    <item android:drawable="@drawable/demon_cleave_3" android:duration="75" />
+    <item android:drawable="@drawable/demon_cleave_4" android:duration="75" />
+    <item android:drawable="@drawable/demon_cleave_5" android:duration="75" />
+    <item android:drawable="@drawable/demon_cleave_6" android:duration="75" />
+    <item android:drawable="@drawable/demon_cleave_7" android:duration="75" />
+    <item android:drawable="@drawable/demon_cleave_8" android:duration="75" />
+    <item android:drawable="@drawable/demon_cleave_9" android:duration="75" />
+    <item android:drawable="@drawable/demon_cleave_10" android:duration="75" />
+    <item android:drawable="@drawable/demon_cleave_11" android:duration="75" />
+    <item android:drawable="@drawable/demon_cleave_12" android:duration="75" />
+    <item android:drawable="@drawable/demon_cleave_13" android:duration="75" />
+    <item android:drawable="@drawable/demon_cleave_14" android:duration="75" />
+    <item android:drawable="@drawable/demon_cleave_15" android:duration="75" />
+</animation-list>

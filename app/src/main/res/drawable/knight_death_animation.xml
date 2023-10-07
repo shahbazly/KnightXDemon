@@ -1,0 +1,32 @@
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="true">
+    <item android:drawable="@drawable/knight_idle_1" android:duration="75" />
+    <item android:drawable="@drawable/knight_idle_2" android:duration="75" />
+    <item android:drawable="@drawable/knight_idle_3" android:duration="75" />
+    <item android:drawable="@drawable/knight_idle_4" android:duration="75" />
+    <item android:drawable="@drawable/knight_idle_5" android:duration="75" />
+    <item android:drawable="@drawable/knight_idle_6" android:duration="75" />
+    <item android:drawable="@drawable/knight_idle_7" android:duration="75" />
+    <item android:drawable="@drawable/knight_idle_8" android:duration="75" />
+    <item android:drawable="@drawable/knight_idle_1" android:duration="75" />
+    <item android:drawable="@drawable/knight_idle_2" android:duration="75" />
+    <item android:drawable="@drawable/knight_take_hit_1" android:duration="75" />
+    <item android:drawable="@drawable/knight_take_hit_2" android:duration="75" />
+    <item android:drawable="@drawable/knight_take_hit_3" android:duration="75" />
+    <item android:drawable="@drawable/knight_take_hit_4" android:duration="75" />
+    <item android:drawable="@drawable/knight_take_hit_5" android:duration="75" />
+    <item android:drawable="@drawable/knight_take_hit_6" android:duration="75" />
+    <item android:drawable="@drawable/knight_death_1" android:duration="75" />
+    <item android:drawable="@drawable/knight_death_2" android:duration="75" />
+    <item android:drawable="@drawable/knight_death_3" android:duration="75" />
+    <item android:drawable="@drawable/knight_death_4" android:duration="75" />
+    <item android:drawable="@drawable/knight_death_5" android:duration="75" />
+    <item android:drawable="@drawable/knight_death_6" android:duration="75" />
+    <item android:drawable="@drawable/knight_death_7" android:duration="75" />
+    <item android:drawable="@drawable/knight_death_8" android:duration="75" />
+    <item android:drawable="@drawable/knight_death_9" android:duration="75" />
+    <item android:drawable="@drawable/knight_death_10" android:duration="75" />
+    <item android:drawable="@drawable/knight_death_11" android:duration="75" />
+    <item android:drawable="@drawable/knight_death_12" android:duration="75" />
+    <item android:drawable="@drawable/knight_death_13" android:duration="75" />
+</animation-list>

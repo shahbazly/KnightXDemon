@@ -1,0 +1,38 @@
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="true">
+    <item android:drawable="@drawable/demon_idle_1" android:duration="125" />
+    <item android:drawable="@drawable/demon_idle_2" android:duration="125" />
+    <item android:drawable="@drawable/demon_idle_3" android:duration="125" />
+    <item android:drawable="@drawable/demon_idle_4" android:duration="125" />
+    <item android:drawable="@drawable/demon_idle_5" android:duration="125" />
+    <item android:drawable="@drawable/demon_idle_6" android:duration="125" />
+    <item android:drawable="@drawable/demon_idle_1" android:duration="125" />
+    <item android:drawable="@drawable/demon_idle_2" android:duration="125" />
+    <item android:drawable="@drawable/demon_take_hit_1" android:duration="75" />
+    <item android:drawable="@drawable/demon_take_hit_2" android:duration="75" />
+    <item android:drawable="@drawable/demon_take_hit_3" android:duration="75" />
+    <item android:drawable="@drawable/demon_take_hit_4" android:duration="75" />
+    <item android:drawable="@drawable/demon_take_hit_5" android:duration="75" />
+    <item android:drawable="@drawable/demon_death_1" android:duration="75" />
+    <item android:drawable="@drawable/demon_death_2" android:duration="75" />
+    <item android:drawable="@drawable/demon_death_3" android:duration="75" />
+    <item android:drawable="@drawable/demon_death_4" android:duration="75" />
+    <item android:drawable="@drawable/demon_death_5" android:duration="75" />
+    <item android:drawable="@drawable/demon_death_6" android:duration="75" />
+    <item android:drawable="@drawable/demon_death_7" android:duration="75" />
+    <item android:drawable="@drawable/demon_death_8" android:duration="75" />
+    <item android:drawable="@drawable/demon_death_9" android:duration="75" />
+    <item android:drawable="@drawable/demon_death_10" android:duration="75" />
+    <item android:drawable="@drawable/demon_death_11" android:duration="75" />
+    <item android:drawable="@drawable/demon_death_12" android:duration="75" />
+    <item android:drawable="@drawable/demon_death_13" android:duration="75" />
+    <item android:drawable="@drawable/demon_death_14" android:duration="75" />
+    <item android:drawable="@drawable/demon_death_15" android:duration="75" />
+    <item android:drawable="@drawable/demon_death_16" android:duration="75" />
+    <item android:drawable="@drawable/demon_death_17" android:duration="75" />
+    <item android:drawable="@drawable/demon_death_18" android:duration="75" />
+    <item android:drawable="@drawable/demon_death_19" android:duration="75" />
+    <item android:drawable="@drawable/demon_death_20" android:duration="75" />
+    <item android:drawable="@drawable/demon_death_21" android:duration="75" />
+    <item android:drawable="@drawable/demon_death_22" android:duration="75" />
+</animation-list>
