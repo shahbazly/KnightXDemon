@@ -1,6 +1,7 @@
 package dev.shahbazly.headsxhands
 
 import android.content.Context
+import android.graphics.Color
 import android.graphics.drawable.AnimationDrawable
 import android.widget.ImageView
 import com.google.android.flexbox.FlexboxLayout
@@ -8,12 +9,12 @@ import kotlin.random.Random
 
 class DiceManager(private val context: Context, private val container: FlexboxLayout) {
 
-    fun rollDice(numberOfDice: Int): Boolean {
+    fun rollDice(creature: Creature, numberOfDice: Int): Boolean {
         cleanUpContainer()
         val diceRolls = List(numberOfDice.coerceAtLeast(1)) {
             rollSingleDice()
         }
-        animateDices(diceRolls)
+        animateDices(creature, diceRolls)
 
         return diceRolls.any { it in 5..6 }
     }
@@ -26,9 +27,13 @@ class DiceManager(private val context: Context, private val container: FlexboxLa
         return Random.nextInt(1, 7)
     }
 
-    private fun animateDices(diceResults: List<Int>) {
+    private fun animateDices(creature: Creature, diceResults: List<Int>) {
         diceResults.forEach { diceResult ->
             val diceImage = ImageView(context)
+            if (creature is Player)
+                diceImage.setColorFilter(Color.argb(70, 0, 200, 0))
+            else
+                diceImage.setColorFilter(Color.argb(70, 200, 0, 0))
 
             val layoutParams = FlexboxLayout.LayoutParams(
                 FlexboxLayout.LayoutParams.WRAP_CONTENT,

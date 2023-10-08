@@ -30,8 +30,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var knightHealingthBar: ProgressBar
     private lateinit var demonAHealthBar: ProgressBar
 
-    private lateinit var knightDiceContainer: FlexboxLayout
-    private lateinit var demonDiceContainer: FlexboxLayout
+    private lateinit var dicesContainer: FlexboxLayout
 
     private lateinit var knight: Player
     private lateinit var demon: Monster
@@ -43,8 +42,7 @@ class MainActivity : AppCompatActivity() {
         knightImage = findViewById(R.id.knightImage)
         demonImage = findViewById(R.id.demonImage)
 
-        knightDiceContainer = findViewById(R.id.playerDicesLayout)
-        demonDiceContainer = findViewById(R.id.monsterDicesLayout)
+        dicesContainer = findViewById(R.id.dicesFlexboxLayout)
 
         restartButton = findViewById(R.id.restartButton)
         gameResultText = findViewById(R.id.gameResultTextView)
@@ -94,6 +92,7 @@ class MainActivity : AppCompatActivity() {
                 healthBar = knightHealthBar,
                 healingBar = knightHealingthBar)
         )
+        val diceManager = DiceManager(this, dicesContainer)
 
         demonNameText.text = demon.name
         demonAttackButton.text = "Attack ${knight.name}"
@@ -102,7 +101,6 @@ class MainActivity : AppCompatActivity() {
         knightAttackButton.text = "Attack ${demon.name}"
 
         demonAttackButton.setOnClickListener {
-            val diceManager = DiceManager(this, demonDiceContainer)
             demon.attack(knight, diceManager)
 
             demonAttackButton.isClickable = false
@@ -112,9 +110,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         knightAttackButton.setOnClickListener {
-            knightDiceContainer.removeAllViews()
-
-            val diceManager = DiceManager(this, knightDiceContainer)
             knight.attack(demon, diceManager)
 
             knightAttackButton.isClickable = false

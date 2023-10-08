@@ -26,7 +26,7 @@ abstract class Creature(
     fun attack(target: Creature, diceManager: DiceManager) {
         require(target != this) { "Существо не может атаковать самого себя" }
         val attackModifier = attack - target.defense + 1
-        val successfulAttack = diceManager.rollDice(attackModifier)
+        val successfulAttack = diceManager.rollDice(this, attackModifier)
 
         setCreatureState(ATTACK)
 

@@ -95,12 +95,11 @@
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="0dp"
         android:layout_height="24dp"
-        android:layout_marginStart="4dp"
         android:layout_marginTop="48dp"
         android:progressDrawable="@drawable/progress_drawable_demon"
         android:rotation="180"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/monsterDicesLayout"
+        app:layout_constraintStart_toStartOf="@+id/verticalCenterGuideline"
         app:layout_constraintTop_toTopOf="parent"
         tools:max="100"
         tools:progress="40" />
@@ -196,21 +195,7 @@
         app:layout_constraintGuide_percent="0.5" />
 
     <com.google.android.flexbox.FlexboxLayout
-        android:id="@+id/playerDicesLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:alignContent="center"
-        app:alignItems="center"
-        app:barrierMargin="8dp"
-        app:flexWrap="wrap"
-        app:justifyContent="center"
-        app:layout_constraintBottom_toTopOf="@+id/horizontalCenterGuideline70"
-        app:layout_constraintEnd_toStartOf="@+id/verticalCenterGuideline"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/horizontalCenterGuideline" />
-
-    <com.google.android.flexbox.FlexboxLayout
-        android:id="@+id/monsterDicesLayout"
+        android:id="@+id/dicesFlexboxLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:alignContent="center"
@@ -220,7 +205,7 @@
         app:justifyContent="center"
         app:layout_constraintBottom_toTopOf="@+id/horizontalCenterGuideline70"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/playerDicesLayout"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/horizontalCenterGuideline" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
