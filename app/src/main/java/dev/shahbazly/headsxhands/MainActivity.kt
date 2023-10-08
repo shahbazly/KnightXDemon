@@ -2,6 +2,8 @@ package dev.shahbazly.headsxhands
 
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -22,7 +24,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var demonImage: ImageView
 
     private lateinit var restartButton: Button
-    private lateinit var demonAttackButton: Button
     private lateinit var knightAttackButton: Button
     private lateinit var knightHealButton: Button
 
@@ -34,11 +35,21 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var knight: Player
     private lateinit var demon: Monster
+    private lateinit var diceManager: DiceManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        initViews()
+        startGame()
+
+        restartButton.setOnClickListener {
+            startGame()
+        }
+    }
+
+    private fun initViews() {
         knightImage = findViewById(R.id.knightImage)
         demonImage = findViewById(R.id.demonImage)
 
@@ -47,9 +58,8 @@ class MainActivity : AppCompatActivity() {
         restartButton = findViewById(R.id.restartButton)
         gameResultText = findViewById(R.id.gameResultTextView)
 
-        demonAttackButton = findViewById(R.id.demonAttackButton)
         knightAttackButton = findViewById(R.id.knightAttackButton)
-        knightHealButton =findViewById(R.id.knightHealButton)
+        knightHealButton = findViewById(R.id.knightHealButton)
 
         knightHealthBar = findViewById(R.id.playerHealthProgressBar)
         knightHealingthBar = findViewById(R.id.playerHealProgressBar)
@@ -57,19 +67,32 @@ class MainActivity : AppCompatActivity() {
 
         knightNameText = findViewById(R.id.playerNameTextView)
         demonNameText = findViewById(R.id.monsterNameTextView)
-
-
-        startGame()
-
-        restartButton.setOnClickListener {
-            startGame()
-        }
     }
 
     private fun startGame() {
         restartButton.visibility = View.GONE
         gameResultText.visibility = View.GONE
 
+        initPlayers()
+        initKnightControls()
+
+    }
+
+    private fun initKnightControls() {
+        knightAttackButton.setOnClickListener {
+            knight.attack(demon, diceManager)
+            knightAttackButton.isEnabled = false
+            if (!demon.isAlive())
+                showResult(knight)
+            else
+                Handler(Looper.getMainLooper()).postDelayed({ demonBehaviour() },2000)
+        }
+        knightHealButton.setOnClickListener {
+            knight.heal()
+        }
+    }
+
+    private fun initPlayers() {
         demon = Monster(
             name = "Demon",
             attack = 28,
@@ -92,34 +115,18 @@ class MainActivity : AppCompatActivity() {
                 healthBar = knightHealthBar,
                 healingBar = knightHealingthBar)
         )
-        val diceManager = DiceManager(this, dicesContainer)
+        diceManager = DiceManager(this, dicesContainer)
 
         demonNameText.text = demon.name
-        demonAttackButton.text = "Attack ${knight.name}"
-
         knightNameText.text = knight.name
-        knightAttackButton.text = "Attack ${demon.name}"
+    }
 
-        demonAttackButton.setOnClickListener {
-            demon.attack(knight, diceManager)
+    private fun demonBehaviour() {
+        demon.attack(knight, diceManager)
 
-            demonAttackButton.isClickable = false
-            knightAttackButton.isClickable = knight.isAlive()
+        knightAttackButton.isEnabled = knight.isAlive()
 
-            if (!knight.isAlive()) showResult(demon)
-        }
-
-        knightAttackButton.setOnClickListener {
-            knight.attack(demon, diceManager)
-
-            knightAttackButton.isClickable = false
-            demonAttackButton.isClickable = demon.isAlive()
-
-            if (!demon.isAlive()) showResult(knight)
-        }
-        knightHealButton.setOnClickListener {
-            knightHealButton.text = knight.heal()
-        }
+        if (!knight.isAlive()) showResult(demon)
     }
 
     private fun showResult(winner: Creature) {
@@ -132,6 +139,7 @@ class MainActivity : AppCompatActivity() {
 
             gameResultText.setTextColor(color)
             restartButton.typeface = typeface
+            restartButton.text = "Restart"
             gameResultText.typeface = typeface
             gameResultText.text = "${winner.name} wins"
         } else {

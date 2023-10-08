@@ -45,8 +45,8 @@ class Player(
         }
     }
 
-    fun heal(): String {
-        return if (isAlive() && maxHealings > 0) {
+    fun heal() {
+        if (isAlive() && maxHealings > 0) {
             val playerCurrentHealth = getHealth()
             val maxHealingAmount = (maxHealth * maxHealingPercentage / 100).coerceAtMost(maxHealth)
             val healing = (playerCurrentHealth + maxHealingAmount).coerceAtMost(maxHealth)
@@ -57,9 +57,8 @@ class Player(
             creatureAnimationManager.updateHealingBar(maxHealings)
             creatureAnimationManager.updateHealthBar(healing)
 
-            "Heal $name ($maxHealings)"
         } else {
-            "No healings"
+            //TODO("нет реализации")
         }
     }
 }

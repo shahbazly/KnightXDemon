@@ -6,32 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/knightAttackButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toStartOf="@+id/verticalCenterGuideline"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/horizontalCenterGuideline70"
-        tools:text="Attack" />
-
-    <Button
-        android:id="@+id/knightHealButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toStartOf="@+id/verticalCenterGuideline"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/knightAttackButton"
-        tools:text="Heal (4)" />
-
-    <Button
-        android:id="@+id/demonAttackButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
+        android:background="@drawable/player_attack_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/verticalCenterGuideline"
-        app:layout_constraintTop_toTopOf="@+id/horizontalCenterGuideline70"
-        tools:text="Attack" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/horizontalCenterGuideline70" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/knightHealButton"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/player_heal_button"
+        app:layout_constraintEnd_toEndOf="@+id/knightAttackButton"
+        app:layout_constraintStart_toStartOf="@+id/knightAttackButton"
+        app:layout_constraintTop_toBottomOf="@id/knightAttackButton" />
 
     <ImageView
         android:id="@+id/backgroundThemeImage"
