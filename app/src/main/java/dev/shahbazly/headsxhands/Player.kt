@@ -16,6 +16,8 @@ class Player(
 
     init {
         healthBar.max = health
+        healthBar.progress = health
+
         setCreatureState(CreatureState.IDLE)
     }
 

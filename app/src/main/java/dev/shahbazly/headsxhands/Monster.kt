@@ -16,6 +16,8 @@ class Monster(
 
     init {
         healthBar.max = health
+        healthBar.progress = health
+
         setCreatureState(CreatureState.IDLE)
     }
     override fun setCreatureState(newState: CreatureState) = when (newState) {
