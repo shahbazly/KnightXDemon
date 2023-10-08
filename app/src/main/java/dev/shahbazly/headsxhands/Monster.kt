@@ -1,65 +1,39 @@
 package dev.shahbazly.headsxhands
 
-import android.graphics.drawable.AnimationDrawable
-import android.widget.ImageView
-import android.widget.ProgressBar
-
 class Monster(
     name: String,
-    private val avatar: ImageView,
-    private val healthBar: ProgressBar,
     attack: Int,
     defense: Int,
     health: Int,
-    damage: IntRange
+    damage: IntRange,
+    private val creatureAnimationManager: CreatureAnimationManager
 ) : Creature(name, attack, defense, health, damage) {
 
     init {
-        healthBar.max = health
-        healthBar.progress = health
+        creatureAnimationManager.restartCreature(health)
+        creatureAnimationManager.setIdleDrawableRes(R.drawable.demon_idle_animation)
 
         setCreatureState(CreatureState.IDLE)
     }
+
     override fun setCreatureState(newState: CreatureState) = when (newState) {
         CreatureState.IDLE -> {
-            avatar.setBackgroundResource(R.drawable.demon_idle_animation)
-            val creatureAnimation = avatar.background as AnimationDrawable
-            creatureAnimation.start()
+            creatureAnimationManager.playAnimation(R.drawable.demon_idle_animation)
         }
+
         CreatureState.ATTACK -> {
-            avatar.setBackgroundResource(R.drawable.demon_attack_animation)
-            val creatureAnimation = avatar.background as AnimationDrawable
-            creatureAnimation.callback =
-                object : AnimationDrawableCallback(creatureAnimation, avatar) {
-                    override fun onAnimationComplete() {
-                        creatureAnimation.stop()
-                        avatar.setBackgroundResource(R.drawable.demon_idle_animation)
-                        val anim = avatar.background as AnimationDrawable
-                        anim.start()
-                    }
-                }
-            creatureAnimation.start()
+            creatureAnimationManager.playSingleAnimation(R.drawable.demon_attack_animation)
         }
+
         CreatureState.DEFEND, CreatureState.TAKE_HIT -> {
-            avatar.setBackgroundResource(R.drawable.demon_take_hit_animation)
-            val creatureAnimation = avatar.background as AnimationDrawable
-            creatureAnimation.callback =
-                object : AnimationDrawableCallback(creatureAnimation, avatar) {
-                    override fun onAnimationComplete() {
-                        healthBar.progress = getHealth()
-                        creatureAnimation.stop()
-                        avatar.setBackgroundResource(R.drawable.demon_idle_animation)
-                        val anim = avatar.background as AnimationDrawable
-                        anim.start()
-                    }
-                }
-            creatureAnimation.start()
+            creatureAnimationManager.playSingleAnimation(R.drawable.demon_take_hit_animation) {
+                creatureAnimationManager.updateHealth(getHealth())
+            }
         }
+
         CreatureState.DIE -> {
-            healthBar.progress = getHealth()
-            avatar.setBackgroundResource(R.drawable.demon_death_animation)
-            val creatureAnimation = avatar.background as AnimationDrawable
-            creatureAnimation.start()
+            creatureAnimationManager.updateHealth(getHealth())
+            creatureAnimationManager.playAnimation(R.drawable.demon_death_animation)
         }
     }
 

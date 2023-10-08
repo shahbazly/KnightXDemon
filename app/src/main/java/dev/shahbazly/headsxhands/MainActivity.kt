@@ -71,21 +71,24 @@ class MainActivity : AppCompatActivity() {
 
         demon = Monster(
             name = "Demon",
-            avatar = demonImage,
-            healthBar = demonAHealthBar,
             attack = 30,
             defense = 30,
             health = 50,
-            damage = 15..20
+            damage = 15..20,
+            creatureAnimationManager = CreatureAnimationManager(
+                avatar = demonImage,
+                healthBar = demonAHealthBar
+            )
         )
         knight = Player(
             name = "Knight",
-            avatar = knightImage,
-            healthBar = knightHealthBar,
             attack = 30,
             defense = 30,
             health = 50,
-            damage = 15..20
+            damage = 15..20,
+            creatureAnimationManager = CreatureAnimationManager(
+                avatar = knightImage,
+                healthBar = knightHealthBar)
         )
 
         demonNameText.text = demon.name
