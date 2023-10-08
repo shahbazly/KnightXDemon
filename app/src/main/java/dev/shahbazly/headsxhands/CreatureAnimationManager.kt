@@ -25,7 +25,7 @@ class CreatureAnimationManager(private val avatar: ImageView, private val health
         avatar.setBackgroundResource(animationDrawable)
         currentAnimation = avatar.background as AnimationDrawable
 
-        currentAnimation?.callback = object : AnimationDrawableCallback(currentAnimation, avatar) {
+        currentAnimation?.callback = object : AnimationDrawableCallback(currentAnimation!!, avatar) {
             override fun onAnimationComplete() {
                 onAnimationComplete()
             }
@@ -46,7 +46,7 @@ class CreatureAnimationManager(private val avatar: ImageView, private val health
         avatar.setBackgroundResource(animationDrawable)
         currentAnimation = avatar.background as AnimationDrawable
 
-        currentAnimation?.callback = object : AnimationDrawableCallback(currentAnimation, avatar) {
+        currentAnimation?.callback = object : AnimationDrawableCallback(currentAnimation!!, avatar) {
             override fun onAnimationComplete() {
                 onAnimationComplete()
                 playIdleAnimation()
