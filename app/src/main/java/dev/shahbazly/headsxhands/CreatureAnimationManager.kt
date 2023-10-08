@@ -1,6 +1,8 @@
 package dev.shahbazly.headsxhands
 
+import android.animation.ObjectAnimator
 import android.graphics.drawable.AnimationDrawable
+import android.view.animation.DecelerateInterpolator
 import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.annotation.DrawableRes
@@ -72,7 +74,11 @@ class CreatureAnimationManager(private val avatar: ImageView, private val health
     }
 
     fun updateHealth(health: Int) {
-        healthBar.progress = health
+        val animation = ObjectAnimator.ofInt(healthBar, "progress", healthBar.progress, health)
+        animation.duration = 200
+        animation.setAutoCancel(true)
+        animation.interpolator = DecelerateInterpolator()
+        animation.start()
     }
 
 }

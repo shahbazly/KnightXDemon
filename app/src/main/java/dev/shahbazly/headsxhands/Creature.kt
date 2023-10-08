@@ -1,6 +1,5 @@
 package dev.shahbazly.headsxhands
 
-import android.util.Log
 import dev.shahbazly.headsxhands.CreatureState.ATTACK
 import dev.shahbazly.headsxhands.CreatureState.DEFEND
 import dev.shahbazly.headsxhands.CreatureState.DIE
@@ -34,11 +33,8 @@ abstract class Creature(
 
         if (successfulAttack) {
             val damage = Random.nextInt(damage)
-            Log.e(name,"$name attack dmg: $damage")
             target.takeDamage(damage)
         } else {
-            Log.e(name,"$name attack dmg: 0")
-
             target.takeDamage(0)
         }
 
@@ -57,17 +53,12 @@ abstract class Creature(
         } else {
             setCreatureState(DEFEND)
         }
-        Log.e(name,"$name health: $health")
     }
 
     abstract fun heal()
 
     fun isAlive(): Boolean {
         return health > 0
-    }
-
-    fun printHealth() {
-        Log.e(name,"health: $health")
     }
 
     fun getHealth() = this.health
