@@ -21,13 +21,12 @@ abstract class Creature(
         require(damage.first > 0 && damage.last <= attack) { "Диапазон урона должен быть больше 0 и меньше либо равен атаке" }
     }
 
-    protected abstract fun setCreatureState(newState: CreatureState)
+    protected abstract fun setCreatureState(state: CreatureState)
 
-    fun attack(target: Creature): List<Int> {
+    fun attack(target: Creature, diceManager: DiceManager) {
         require(target != this) { "Существо не может атаковать самого себя" }
         val attackModifier = attack - target.defense + 1
-        val diceRolls = List(attackModifier.coerceAtLeast(1)) { Random.nextInt(1, 7) }
-        val successfulAttack = diceRolls.any { it in 5..6 }
+        val successfulAttack = diceManager.rollDice(attackModifier)
 
         setCreatureState(ATTACK)
 
@@ -37,8 +36,6 @@ abstract class Creature(
         } else {
             target.takeDamage(0)
         }
-
-        return diceRolls
     }
 
     private fun takeDamage(damage: Int) {

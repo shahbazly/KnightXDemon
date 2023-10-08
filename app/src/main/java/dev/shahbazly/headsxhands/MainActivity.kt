@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity() {
             name = "Demon",
             attack = 30,
             defense = 30,
-            health = 50,
+            health = 30,
             damage = 15..20,
             creatureAnimationManager = CreatureAnimationManager(
                 avatar = demonImage,
@@ -84,7 +84,7 @@ class MainActivity : AppCompatActivity() {
             name = "Knight",
             attack = 30,
             defense = 30,
-            health = 50,
+            health = 30,
             damage = 15..20,
             creatureAnimationManager = CreatureAnimationManager(
                 avatar = knightImage,
@@ -98,10 +98,8 @@ class MainActivity : AppCompatActivity() {
         knightAttackButton.text = "Attack ${demon.name}"
 
         demonAttackButton.setOnClickListener {
-            demonDiceContainer.removeAllViews()
-
-            val dice = demon.attack(knight)
-            animateDices(demonDiceContainer, dice)
+            val diceManager = DiceManager(this, demonDiceContainer)
+            demon.attack(knight, diceManager)
 
             demonAttackButton.isClickable = false
             knightAttackButton.isClickable = knight.isAlive()
@@ -112,8 +110,8 @@ class MainActivity : AppCompatActivity() {
         knightAttackButton.setOnClickListener {
             knightDiceContainer.removeAllViews()
 
-            val dice = knight.attack(demon)
-            animateDices(knightDiceContainer, dice)
+            val diceManager = DiceManager(this, knightDiceContainer)
+            knight.attack(demon, diceManager)
 
             knightAttackButton.isClickable = false
             demonAttackButton.isClickable = demon.isAlive()
@@ -144,36 +142,5 @@ class MainActivity : AppCompatActivity() {
             gameResultText.typeface = typeface
             gameResultText.text = "${winner.name.uppercase()} WINS"
         }
-    }
-
-    private fun animateDices(container: FlexboxLayout, diceResults: List<Int>) {
-        diceResults.forEach { diceResult ->
-            val diceImage = ImageView(this)
-
-            val layoutParams = FlexboxLayout.LayoutParams(
-                FlexboxLayout.LayoutParams.WRAP_CONTENT,
-                FlexboxLayout.LayoutParams.WRAP_CONTENT
-            )
-            layoutParams.setMargins(48, 48, 48, 48)
-            diceImage.layoutParams = layoutParams
-
-            diceImage.scaleX = 2.5f
-            diceImage.scaleY = 2.5f
-            diceImage.setImageResource(
-                when (diceResult) {
-                    1 -> R.drawable.dice_animation_1
-                    2 -> R.drawable.dice_animation_2
-                    3 -> R.drawable.dice_animation_3
-                    4 -> R.drawable.dice_animation_4
-                    5 -> R.drawable.dice_animation_5
-                    6 -> R.drawable.dice_animation_6
-                    else -> R.drawable.dice_animation_error
-                }
-            )
-            val animationDrawable = diceImage.drawable as AnimationDrawable
-            container.addView(diceImage)
-            animationDrawable.start()
-        }
-
     }
 }

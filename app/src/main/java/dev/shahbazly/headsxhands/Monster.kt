@@ -16,7 +16,7 @@ class Monster(
         setCreatureState(CreatureState.IDLE)
     }
 
-    override fun setCreatureState(newState: CreatureState) = when (newState) {
+    override fun setCreatureState(state: CreatureState) = when (state) {
         CreatureState.IDLE -> {
             creatureAnimationManager.playAnimation(R.drawable.demon_idle_animation)
         }

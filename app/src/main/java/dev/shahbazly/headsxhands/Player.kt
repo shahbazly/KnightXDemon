@@ -16,7 +16,7 @@ class Player(
         setCreatureState(CreatureState.IDLE)
     }
 
-    override fun setCreatureState(newState: CreatureState) = when (newState) {
+    override fun setCreatureState(state: CreatureState) = when (state) {
         CreatureState.IDLE -> {
             creatureAnimationManager.playAnimation(R.drawable.knight_idle_animation)
         }
