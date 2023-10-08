@@ -27,17 +27,13 @@ class Monster(
 
         CreatureState.DEFEND, CreatureState.TAKE_HIT -> {
             creatureAnimationManager.playSingleAnimation(R.drawable.demon_take_hit_animation) {
-                creatureAnimationManager.updateHealth(getHealth())
+                creatureAnimationManager.updateHealthBar(getHealth())
             }
         }
 
         CreatureState.DIE -> {
-            creatureAnimationManager.updateHealth(getHealth())
+            creatureAnimationManager.updateHealthBar(getHealth())
             creatureAnimationManager.playAnimation(R.drawable.demon_death_animation)
         }
-    }
-
-    override fun heal() {
-        TODO("Not yet implemented")
     }
 }

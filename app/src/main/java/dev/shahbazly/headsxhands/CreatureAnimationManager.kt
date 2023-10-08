@@ -7,7 +7,11 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.annotation.DrawableRes
 
-class CreatureAnimationManager(private val avatar: ImageView, private val healthBar: ProgressBar) {
+class CreatureAnimationManager(
+    private val avatar: ImageView,
+    private val healthBar: ProgressBar,
+    private val healingBar: ProgressBar? = null
+) {
     private var currentAnimation: AnimationDrawable? = null
 
     @DrawableRes
@@ -27,11 +31,12 @@ class CreatureAnimationManager(private val avatar: ImageView, private val health
         avatar.setBackgroundResource(animationDrawable)
         currentAnimation = avatar.background as AnimationDrawable
 
-        currentAnimation?.callback = object : AnimationDrawableCallback(currentAnimation!!, avatar) {
-            override fun onAnimationComplete() {
-                onAnimationComplete()
+        currentAnimation?.callback =
+            object : AnimationDrawableCallback(currentAnimation!!, avatar) {
+                override fun onAnimationComplete() {
+                    onAnimationComplete()
+                }
             }
-        }
         currentAnimation?.start()
     }
 
@@ -48,12 +53,13 @@ class CreatureAnimationManager(private val avatar: ImageView, private val health
         avatar.setBackgroundResource(animationDrawable)
         currentAnimation = avatar.background as AnimationDrawable
 
-        currentAnimation?.callback = object : AnimationDrawableCallback(currentAnimation!!, avatar) {
-            override fun onAnimationComplete() {
-                onAnimationComplete()
-                playIdleAnimation()
+        currentAnimation?.callback =
+            object : AnimationDrawableCallback(currentAnimation!!, avatar) {
+                override fun onAnimationComplete() {
+                    onAnimationComplete()
+                    playIdleAnimation()
+                }
             }
-        }
         currentAnimation?.start()
     }
 
@@ -68,17 +74,35 @@ class CreatureAnimationManager(private val avatar: ImageView, private val health
         }
     }
 
+    fun restartCreature(health: Int, healingsRemain: Int) {
+        healthBar.max = health
+        healthBar.progress = health
+
+        healingBar?.max = healingsRemain
+        healingBar?.progress = healingsRemain
+    }
+
     fun restartCreature(health: Int) {
         healthBar.max = health
         healthBar.progress = health
     }
 
-    fun updateHealth(health: Int) {
+    fun updateHealthBar(health: Int) {
         val animation = ObjectAnimator.ofInt(healthBar, "progress", healthBar.progress, health)
         animation.duration = 200
         animation.setAutoCancel(true)
         animation.interpolator = DecelerateInterpolator()
         animation.start()
+    }
+
+    fun updateHealingBar(healingsRemain: Int) {
+        healingBar?.let {
+            val animation = ObjectAnimator.ofInt(it, "progress", it.progress, healingsRemain)
+            animation.duration = 200
+            animation.setAutoCancel(true)
+            animation.interpolator = DecelerateInterpolator()
+            animation.start()
+        }
     }
 
 }

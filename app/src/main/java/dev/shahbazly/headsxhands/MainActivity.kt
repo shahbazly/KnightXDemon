@@ -1,7 +1,6 @@
 package dev.shahbazly.headsxhands
 
 import android.graphics.Color
-import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -25,8 +24,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var restartButton: Button
     private lateinit var demonAttackButton: Button
     private lateinit var knightAttackButton: Button
+    private lateinit var knightHealButton: Button
 
     private lateinit var knightHealthBar: ProgressBar
+    private lateinit var knightHealingthBar: ProgressBar
     private lateinit var demonAHealthBar: ProgressBar
 
     private lateinit var knightDiceContainer: FlexboxLayout
@@ -50,8 +51,10 @@ class MainActivity : AppCompatActivity() {
 
         demonAttackButton = findViewById(R.id.demonAttackButton)
         knightAttackButton = findViewById(R.id.knightAttackButton)
+        knightHealButton =findViewById(R.id.knightHealButton)
 
         knightHealthBar = findViewById(R.id.playerHealthProgressBar)
+        knightHealingthBar = findViewById(R.id.playerHealProgressBar)
         demonAHealthBar = findViewById(R.id.monsterHealthProgressBar)
 
         knightNameText = findViewById(R.id.playerNameTextView)
@@ -71,9 +74,9 @@ class MainActivity : AppCompatActivity() {
 
         demon = Monster(
             name = "Demon",
-            attack = 30,
-            defense = 30,
-            health = 30,
+            attack = 28,
+            defense = 25,
+            health = 100,
             damage = 15..20,
             creatureAnimationManager = CreatureAnimationManager(
                 avatar = demonImage,
@@ -82,13 +85,14 @@ class MainActivity : AppCompatActivity() {
         )
         knight = Player(
             name = "Knight",
-            attack = 30,
-            defense = 30,
-            health = 30,
+            attack = 26,
+            defense = 21,
+            health = 100,
             damage = 15..20,
             creatureAnimationManager = CreatureAnimationManager(
                 avatar = knightImage,
-                healthBar = knightHealthBar)
+                healthBar = knightHealthBar,
+                healingBar = knightHealingthBar)
         )
 
         demonNameText.text = demon.name
@@ -117,6 +121,9 @@ class MainActivity : AppCompatActivity() {
             demonAttackButton.isClickable = demon.isAlive()
 
             if (!demon.isAlive()) showResult(knight)
+        }
+        knightHealButton.setOnClickListener {
+            knightHealButton.text = knight.heal()
         }
     }
 

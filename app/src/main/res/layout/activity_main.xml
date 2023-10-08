@@ -8,12 +8,21 @@
 
     <Button
         android:id="@+id/knightAttackButton"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toStartOf="@+id/verticalCenterGuideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/horizontalCenterGuideline70"
         tools:text="Attack" />
+
+    <Button
+        android:id="@+id/knightHealButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/verticalCenterGuideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/knightAttackButton"
+        tools:text="Heal (4)" />
 
     <Button
         android:id="@+id/demonAttackButton"
@@ -88,13 +97,13 @@
         android:layout_height="24dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="48dp"
-        android:max="100"
-        android:progress="100"
         android:progressDrawable="@drawable/progress_drawable_demon"
         android:rotation="180"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/monsterDicesLayout"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:max="100"
+        tools:progress="40" />
 
     <ProgressBar
         android:id="@+id/playerHealthProgressBar"
@@ -103,12 +112,24 @@
         android:layout_height="24dp"
         android:layout_marginTop="48dp"
         android:layout_marginEnd="4dp"
-        android:max="100"
-        android:progress="100"
         android:progressDrawable="@drawable/progress_drawable_knight"
         app:layout_constraintEnd_toStartOf="@+id/verticalCenterGuideline"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:max="100"
+        tools:progress="70" />
+
+    <ProgressBar
+        android:id="@+id/playerHealProgressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="100dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="2dp"
+        android:progressDrawable="@drawable/progress_drawable_heal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/playerHealthProgressBar"
+        tools:max="4"
+        tools:progress="3" />
 
     <TextView
         android:id="@+id/gameResultTextView"

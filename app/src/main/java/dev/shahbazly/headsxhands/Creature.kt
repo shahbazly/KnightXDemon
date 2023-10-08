@@ -52,11 +52,13 @@ abstract class Creature(
         }
     }
 
-    abstract fun heal()
-
     fun isAlive(): Boolean {
         return health > 0
     }
 
     fun getHealth() = this.health
+
+    fun setHealth(health: Int) {
+        this.health = health
+    }
 }
