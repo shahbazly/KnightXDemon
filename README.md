@@ -8,7 +8,7 @@ Telegram: [@shahbazly](https://t.me/shahbazly)
 ## Демонстрация
 | Рыцарь победжает | Демон побеждает |
 |-----------|---------|
-| <video src='https://github.com/shahbazly/KnightXDemon/assets/8513082/c154db86-a899-4db1-9294-b9e1ad082b16' width=360/> | <video src='https://github.com/shahbazly/KnightXDemon/assets/8513082/3015a73d-9040-461b-bb00-544ed12477ee' width=360/> |
+| <video src='https://github.com/shahbazly/KnightXDemon/assets/8513082/11aaf63b-177c-4036-aaa4-6560a860541e' width=360/> | <video src='https://github.com/shahbazly/KnightXDemon/assets/8513082/937e69be-1661-4f43-bb03-9d9dd71ea880' width=360/> |
 
 ## Задание
 Спроектируйте и реализуйте классы для одной видеоигры. Реализацию опубликуйте в открытом репозитории на github. В readme репозитория оставьте свое имя пользователя в Telegram для связи.
