@@ -39,6 +39,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var demon: Monster
     private lateinit var diceManager: DiceManager
 
+    private lateinit var lightningAnimation: AnimationDrawable
+
     private val monsterDelayBeforeAttack = 100L
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,10 +48,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         initViews()
+        setLightningAttack()
         startGame()
 
         restartButton.setOnClickListener {
-//            lightningAttack()
             startGame()
         }
     }
@@ -76,12 +78,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startGame() {
+        lightningAttack()
         restartButton.visibility = View.GONE
         gameResultText.visibility = View.GONE
-
-        lightningImage.setBackgroundResource(R.drawable.lightning_animation)
-        val animation = lightningImage.background as AnimationDrawable
-        animation.start()
 
         initPlayers()
         initKnightControls()
@@ -194,8 +193,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun setLightningAttack() {
+        lightningImage.setBackgroundResource(R.drawable.lightning_animation)
+        lightningAnimation = lightningImage.background as AnimationDrawable
+    }
+
     private fun lightningAttack() {
-        val animation = lightningImage.background as AnimationDrawable
-        animation.start()
+        lightningAnimation.stop()
+        lightningAnimation.start()
     }
 }
