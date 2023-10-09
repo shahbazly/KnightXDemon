@@ -1,9 +1,9 @@
-package dev.shahbazly.headsxhands
+package dev.shahbazly.headsxhands.models
 
-import dev.shahbazly.headsxhands.CreatureState.ATTACK
-import dev.shahbazly.headsxhands.CreatureState.DEFEND
-import dev.shahbazly.headsxhands.CreatureState.DIE
-import dev.shahbazly.headsxhands.CreatureState.TAKE_HIT
+import dev.shahbazly.headsxhands.models.CreatureState.ATTACK
+import dev.shahbazly.headsxhands.models.CreatureState.DEFEND
+import dev.shahbazly.headsxhands.models.CreatureState.DIE
+import dev.shahbazly.headsxhands.models.CreatureState.TAKE_HIT
 import kotlin.random.Random
 import kotlin.random.nextInt
 

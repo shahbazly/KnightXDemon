@@ -1,6 +1,8 @@
-package dev.shahbazly.headsxhands
+package dev.shahbazly.headsxhands.models
 
-class Player(
+import dev.shahbazly.headsxhands.R
+
+class Monster(
     name: String,
     attack: Int,
     defense: Int,
@@ -9,12 +11,8 @@ class Player(
     private val creatureAnimationManager: CreatureAnimationManager
 ) : Creature(name, attack, defense, health, damage) {
 
-    private val maxHealth = health
-    private var maxHealings = 4
-    private val maxHealingPercentage = 30
-
     init {
-        creatureAnimationManager.setHealth(health, maxHealings)
+        creatureAnimationManager.setHealth(health)
         setCreatureState(CreatureState.IDLE)
     }
 
@@ -22,28 +20,30 @@ class Player(
         CreatureState.IDLE -> {
             creatureAnimationManager.playAnimation(
                 CreatureState.IDLE,
-                R.drawable.knight_idle_animation
+                R.drawable.demon_idle_animation
             )
         }
 
         CreatureState.ATTACK -> {
             creatureAnimationManager.playSingleAnimation(
                 CreatureState.ATTACK,
-                R.drawable.knight_attack_animation
+                R.drawable.demon_attack_animation
             )
         }
 
         CreatureState.DEFEND -> {
             creatureAnimationManager.playSingleAnimation(
                 CreatureState.DEFEND,
-                R.drawable.knight_defend_animation
-            )
+                R.drawable.demon_take_hit_animation
+            ) {
+                creatureAnimationManager.updateHealthBar(getHealth())
+            }
         }
 
         CreatureState.TAKE_HIT -> {
             creatureAnimationManager.playSingleAnimation(
                 CreatureState.TAKE_HIT,
-                R.drawable.knight_take_hit_animation
+                R.drawable.demon_take_hit_animation
             ) {
                 creatureAnimationManager.updateHealthBar(getHealth())
             }
@@ -53,24 +53,8 @@ class Player(
             creatureAnimationManager.updateHealthBar(getHealth())
             creatureAnimationManager.playAnimation(
                 CreatureState.DIE,
-                R.drawable.knight_death_animation
+                R.drawable.demon_death_animation
             )
-        }
-    }
-
-    fun isHealAvailable() = isAlive() && maxHealings > 0 && getHealth() < maxHealth
-
-    fun heal() {
-        val playerCurrentHealth = getHealth()
-        if (isAlive() && maxHealings > 0 && playerCurrentHealth < maxHealth) {
-            val maxHealingAmount = (maxHealth * maxHealingPercentage / 100).coerceAtMost(maxHealth)
-            val healing = (playerCurrentHealth + maxHealingAmount).coerceAtMost(maxHealth)
-
-            setHealth(healing)
-
-            maxHealings--
-            creatureAnimationManager.updateHealingBar(maxHealings)
-            creatureAnimationManager.updateHealthBar(healing)
         }
     }
 }

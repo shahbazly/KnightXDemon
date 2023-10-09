@@ -1,4 +1,4 @@
-package dev.shahbazly.headsxhands
+package dev.shahbazly.headsxhands.listeners
 
 interface CreatureAnimationListener {
     fun onDeathAnimationFinished()

@@ -1,4 +1,4 @@
-package dev.shahbazly.headsxhands
+package dev.shahbazly.headsxhands.models
 
 enum class CreatureState {
     IDLE,

@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Knight vs Demon</string>
+    <string name="src_restart_demon_style">RESTART</string>
+    <string name="src_restart_knight_style">RESTART</string>
+    <string name="src_demon_wins">%s WINS</string>
+    <string name="src_knight_wins">%s wins</string>
+
 </resources>

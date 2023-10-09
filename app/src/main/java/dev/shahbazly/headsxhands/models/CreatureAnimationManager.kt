@@ -1,4 +1,4 @@
-package dev.shahbazly.headsxhands
+package dev.shahbazly.headsxhands.models
 
 import android.animation.ObjectAnimator
 import android.graphics.drawable.AnimationDrawable
@@ -6,6 +6,8 @@ import android.view.animation.DecelerateInterpolator
 import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.annotation.DrawableRes
+import dev.shahbazly.headsxhands.AnimationDrawableCallback
+import dev.shahbazly.headsxhands.listeners.CreatureAnimationListener
 
 class CreatureAnimationManager(
     private val avatar: ImageView,

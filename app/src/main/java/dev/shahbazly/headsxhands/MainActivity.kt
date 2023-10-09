@@ -1,6 +1,5 @@
 package dev.shahbazly.headsxhands
 
-import android.graphics.Color
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.os.Handler
@@ -13,6 +12,11 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import com.google.android.flexbox.FlexboxLayout
+import dev.shahbazly.headsxhands.listeners.CreatureAnimationListener
+import dev.shahbazly.headsxhands.models.CreatureAnimationManager
+import dev.shahbazly.headsxhands.models.DiceManager
+import dev.shahbazly.headsxhands.models.Monster
+import dev.shahbazly.headsxhands.models.Player
 
 
 class MainActivity : AppCompatActivity() {
@@ -174,22 +178,23 @@ class MainActivity : AppCompatActivity() {
 
         if (knight.isAlive()) {
             val typeface = ResourcesCompat.getFont(baseContext, R.font.cloister)
-            val color = Color.parseColor("#3042CC")
+            val color = resources.getColor(R.color.blue)
 
             gameResultText.setTextColor(color)
             restartButton.typeface = typeface
-            restartButton.text = "Restart"
             gameResultText.typeface = typeface
-            gameResultText.text = "${knight.name} wins"
+            restartButton.text = resources.getString(R.string.src_restart_knight_style)
+            gameResultText.text = resources.getString(R.string.src_knight_wins, knight.name)
         } else {
             val typeface = ResourcesCompat.getFont(baseContext, R.font.darkmode)
-            val color = Color.parseColor("#F15156");
+            val color = resources.getColor(R.color.red)
 
             gameResultText.setTextColor(color)
             restartButton.typeface = typeface
-            restartButton.text = "RESTART"
             gameResultText.typeface = typeface
-            gameResultText.text = "${demon.name.uppercase()} WINS"
+            restartButton.text = resources.getString(R.string.src_restart_demon_style)
+            gameResultText.text =
+                resources.getString(R.string.src_demon_wins, demon.name.uppercase())
         }
     }
 

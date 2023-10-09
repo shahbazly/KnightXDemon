@@ -1,10 +1,11 @@
-package dev.shahbazly.headsxhands
+package dev.shahbazly.headsxhands.models
 
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.AnimationDrawable
 import android.widget.ImageView
 import com.google.android.flexbox.FlexboxLayout
+import dev.shahbazly.headsxhands.R
 import kotlin.random.Random
 
 class DiceManager(private val context: Context, private val container: FlexboxLayout) {
