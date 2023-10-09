@@ -15,8 +15,6 @@ class Player(
 
     init {
         creatureAnimationManager.setHealth(health, maxHealings)
-        creatureAnimationManager.setIdleDrawableRes(R.drawable.knight_idle_animation)
-
         setCreatureState(CreatureState.IDLE)
     }
 
@@ -60,7 +58,7 @@ class Player(
         }
     }
 
-    fun isHealAvailable() = isAlive() && maxHealings > 0 &&  getHealth() < maxHealth
+    fun isHealAvailable() = isAlive() && maxHealings > 0 && getHealth() < maxHealth
 
     fun heal() {
         val playerCurrentHealth = getHealth()

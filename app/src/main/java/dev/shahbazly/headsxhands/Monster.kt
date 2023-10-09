@@ -11,8 +11,6 @@ class Monster(
 
     init {
         creatureAnimationManager.setHealth(health)
-        creatureAnimationManager.setIdleDrawableRes(R.drawable.demon_idle_animation)
-
         setCreatureState(CreatureState.IDLE)
     }
 

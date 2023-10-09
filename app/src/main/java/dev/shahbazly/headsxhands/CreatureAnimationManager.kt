@@ -18,10 +18,6 @@ class CreatureAnimationManager(
     @DrawableRes
     private var idleDrawableRes: Int? = null
 
-    fun setIdleDrawableRes(@DrawableRes animationDrawable: Int) {
-        idleDrawableRes = animationDrawable
-    }
-
     fun setAnimationListener(listener: CreatureAnimationListener) {
         creatureAnimationListener = listener
     }
@@ -34,6 +30,9 @@ class CreatureAnimationManager(
         @DrawableRes animationDrawable: Int,
         onAnimationComplete: () -> Unit? = {}
     ) {
+        if (idleDrawableRes == null && creatureState == CreatureState.IDLE)
+            idleDrawableRes = animationDrawable
+
         currentAnimation?.stop()
 
         avatar.setBackgroundResource(animationDrawable)
