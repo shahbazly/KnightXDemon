@@ -1,6 +1,7 @@
 package dev.shahbazly.headsxhands
 
 import android.graphics.Color
+import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -22,6 +23,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var knightImage: ImageView
     private lateinit var demonImage: ImageView
+    private lateinit var lightningImage: ImageView
 
     private lateinit var restartButton: Button
     private lateinit var knightAttackButton: Button
@@ -37,7 +39,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var demon: Monster
     private lateinit var diceManager: DiceManager
 
-    private val monsterDelayBeforeAttack = 1000L
+    private val monsterDelayBeforeAttack = 100L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +49,7 @@ class MainActivity : AppCompatActivity() {
         startGame()
 
         restartButton.setOnClickListener {
+//            lightningAttack()
             startGame()
         }
     }
@@ -54,6 +57,7 @@ class MainActivity : AppCompatActivity() {
     private fun initViews() {
         knightImage = findViewById(R.id.knightImage)
         demonImage = findViewById(R.id.demonImage)
+        lightningImage = findViewById(R.id.lightningImageView)
 
         dicesContainer = findViewById(R.id.dicesFlexboxLayout)
 
@@ -74,6 +78,10 @@ class MainActivity : AppCompatActivity() {
     private fun startGame() {
         restartButton.visibility = View.GONE
         gameResultText.visibility = View.GONE
+
+        lightningImage.setBackgroundResource(R.drawable.lightning_animation)
+        val animation = lightningImage.background as AnimationDrawable
+        animation.start()
 
         initPlayers()
         initKnightControls()
@@ -184,5 +192,10 @@ class MainActivity : AppCompatActivity() {
             gameResultText.typeface = typeface
             gameResultText.text = "${demon.name.uppercase()} WINS"
         }
+    }
+
+    private fun lightningAttack() {
+        val animation = lightningImage.background as AnimationDrawable
+        animation.start()
     }
 }

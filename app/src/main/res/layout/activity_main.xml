@@ -122,6 +122,18 @@
         tools:max="4"
         tools:progress="3" />
 
+    <ImageView
+        android:id="@+id/lightningImageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleX="1.35"
+        android:scaleY="1.35"
+        app:layout_constraintBottom_toTopOf="@+id/horizontalCenterGuideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="contentDescription" />
+
     <TextView
         android:id="@+id/gameResultTextView"
         android:layout_width="wrap_content"
