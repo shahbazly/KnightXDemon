@@ -13,38 +13,24 @@ class CreatureAnimationManager(
     private val healingBar: ProgressBar? = null
 ) {
     private var currentAnimation: AnimationDrawable? = null
+    private var creatureAnimationListener: CreatureAnimationListener? = null
 
     @DrawableRes
     private var idleDrawableRes: Int? = null
-
 
     fun setIdleDrawableRes(@DrawableRes animationDrawable: Int) {
         idleDrawableRes = animationDrawable
     }
 
-    /**
-     * Воспроизводится зацикленная анимация
-     */
-    fun playAnimation(@DrawableRes animationDrawable: Int, onAnimationComplete: () -> Unit? = {}) {
-        currentAnimation?.stop()
-
-        avatar.setBackgroundResource(animationDrawable)
-        currentAnimation = avatar.background as AnimationDrawable
-
-        currentAnimation?.callback =
-            object : AnimationDrawableCallback(currentAnimation!!, avatar) {
-                override fun onAnimationComplete() {
-                    onAnimationComplete()
-                }
-            }
-        currentAnimation?.start()
+    fun setAnimationListener(listener: CreatureAnimationListener) {
+        creatureAnimationListener = listener
     }
 
     /**
-     * Воспроизводится незацикленная анимация (прим. атаки или обороны)
-     * после которой воспроизводится анимация ожидания (idle animation)
+     * Воспроизводится зацикленная анимация
      */
-    fun playSingleAnimation(
+    fun playAnimation(
+        creatureState: CreatureState,
         @DrawableRes animationDrawable: Int,
         onAnimationComplete: () -> Unit? = {}
     ) {
@@ -56,6 +42,33 @@ class CreatureAnimationManager(
         currentAnimation?.callback =
             object : AnimationDrawableCallback(currentAnimation!!, avatar) {
                 override fun onAnimationComplete() {
+                    if (creatureState == CreatureState.DIE)
+                        creatureAnimationListener?.onDeathAnimationFinished()
+                    onAnimationComplete()
+                }
+            }
+        currentAnimation?.start()
+    }
+
+    /**
+     * Воспроизводится незацикленная анимация (прим. атаки или обороны)
+     * после которой воспроизводится анимация ожидания (idle animation)
+     */
+    fun playSingleAnimation(
+        creatureState: CreatureState,
+        @DrawableRes animationDrawable: Int,
+        onAnimationComplete: () -> Unit? = {}
+    ) {
+        currentAnimation?.stop()
+
+        avatar.setBackgroundResource(animationDrawable)
+        currentAnimation = avatar.background as AnimationDrawable
+
+        currentAnimation?.callback =
+            object : AnimationDrawableCallback(currentAnimation!!, avatar) {
+                override fun onAnimationComplete() {
+                    if (creatureState == CreatureState.ATTACK)
+                        creatureAnimationListener?.onAttackAnimationFinished()
                     onAnimationComplete()
                     playIdleAnimation()
                 }
@@ -74,7 +87,7 @@ class CreatureAnimationManager(
         }
     }
 
-    fun restartCreature(health: Int, healingsRemain: Int) {
+    fun setHealth(health: Int, healingsRemain: Int) {
         healthBar.max = health
         healthBar.progress = health
 
@@ -82,7 +95,7 @@ class CreatureAnimationManager(
         healingBar?.progress = healingsRemain
     }
 
-    fun restartCreature(health: Int) {
+    fun setHealth(health: Int) {
         healthBar.max = health
         healthBar.progress = health
     }

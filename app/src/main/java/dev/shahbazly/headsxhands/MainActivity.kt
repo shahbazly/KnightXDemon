@@ -29,13 +29,15 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var knightHealthBar: ProgressBar
     private lateinit var knightHealingthBar: ProgressBar
-    private lateinit var demonAHealthBar: ProgressBar
+    private lateinit var demonHealthBar: ProgressBar
 
     private lateinit var dicesContainer: FlexboxLayout
 
     private lateinit var knight: Player
     private lateinit var demon: Monster
     private lateinit var diceManager: DiceManager
+
+    private val monsterDelayBeforeAttack = 1000L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,7 +65,7 @@ class MainActivity : AppCompatActivity() {
 
         knightHealthBar = findViewById(R.id.playerHealthProgressBar)
         knightHealingthBar = findViewById(R.id.playerHealProgressBar)
-        demonAHealthBar = findViewById(R.id.monsterHealthProgressBar)
+        demonHealthBar = findViewById(R.id.monsterHealthProgressBar)
 
         knightNameText = findViewById(R.id.playerNameTextView)
         demonNameText = findViewById(R.id.monsterNameTextView)
@@ -75,65 +77,95 @@ class MainActivity : AppCompatActivity() {
 
         initPlayers()
         initKnightControls()
-
     }
 
     private fun initKnightControls() {
+        knightAttackButton.isEnabled = true
+        knightHealButton.isEnabled = knight.isHealAvailable()
+
         knightAttackButton.setOnClickListener {
             knight.attack(demon, diceManager)
             knightAttackButton.isEnabled = false
-            if (!demon.isAlive())
-                showResult(knight)
-            else
-                Handler(Looper.getMainLooper()).postDelayed({ demonBehaviour() },2000)
+            knightHealButton.isEnabled = false
         }
+
         knightHealButton.setOnClickListener {
             knight.heal()
+            knightHealButton.isEnabled = knight.isHealAvailable()
         }
     }
 
     private fun initPlayers() {
+        val demonAnimationManager = CreatureAnimationManager(
+            avatar = demonImage,
+            healthBar = demonHealthBar
+        )
+
+        val knightAnimationManager = CreatureAnimationManager(
+            avatar = knightImage,
+            healthBar = knightHealthBar,
+            healingBar = knightHealingthBar
+        )
+
+        demonAnimationManager.setAnimationListener(object : CreatureAnimationListener {
+            override fun onDeathAnimationFinished() {
+                showResult()
+            }
+
+            override fun onAttackAnimationFinished() {
+                if (knight.isAlive()) {
+                    knightAttackButton.isEnabled = true
+                    knightHealButton.isEnabled = knight.isHealAvailable()
+                } else {
+                    showResult()
+                }
+            }
+        })
+
+        knightAnimationManager.setAnimationListener(object : CreatureAnimationListener {
+            override fun onDeathAnimationFinished() {
+                showResult()
+            }
+
+            override fun onAttackAnimationFinished() {
+                Handler(Looper.getMainLooper()).postDelayed({
+                    if (demon.isAlive())
+                        demon.attack(knight, diceManager)
+                    else
+                        showResult()
+                }, monsterDelayBeforeAttack)
+            }
+        })
+
         demon = Monster(
             name = "Demon",
             attack = 28,
-            defense = 25,
+            defense = 23,
             health = 100,
-            damage = 15..20,
-            creatureAnimationManager = CreatureAnimationManager(
-                avatar = demonImage,
-                healthBar = demonAHealthBar
-            )
+            damage = 15..28,
+            creatureAnimationManager = demonAnimationManager
         )
+
         knight = Player(
             name = "Knight",
             attack = 26,
-            defense = 21,
+            defense = 22,
             health = 100,
-            damage = 15..20,
-            creatureAnimationManager = CreatureAnimationManager(
-                avatar = knightImage,
-                healthBar = knightHealthBar,
-                healingBar = knightHealingthBar)
+            damage = 1..26,
+            creatureAnimationManager = knightAnimationManager
         )
+
         diceManager = DiceManager(this, dicesContainer)
 
         demonNameText.text = demon.name
         knightNameText.text = knight.name
     }
 
-    private fun demonBehaviour() {
-        demon.attack(knight, diceManager)
-
-        knightAttackButton.isEnabled = knight.isAlive()
-
-        if (!knight.isAlive()) showResult(demon)
-    }
-
-    private fun showResult(winner: Creature) {
+    private fun showResult() {
         restartButton.visibility = View.VISIBLE
         gameResultText.visibility = View.VISIBLE
 
-        if (winner is Player) {
+        if (knight.isAlive()) {
             val typeface = ResourcesCompat.getFont(baseContext, R.font.cloister)
             val color = Color.parseColor("#3042CC")
 
@@ -141,7 +173,7 @@ class MainActivity : AppCompatActivity() {
             restartButton.typeface = typeface
             restartButton.text = "Restart"
             gameResultText.typeface = typeface
-            gameResultText.text = "${winner.name} wins"
+            gameResultText.text = "${knight.name} wins"
         } else {
             val typeface = ResourcesCompat.getFont(baseContext, R.font.darkmode)
             val color = Color.parseColor("#F15156");
@@ -150,7 +182,7 @@ class MainActivity : AppCompatActivity() {
             restartButton.typeface = typeface
             restartButton.text = "RESTART"
             gameResultText.typeface = typeface
-            gameResultText.text = "${winner.name.uppercase()} WINS"
+            gameResultText.text = "${demon.name.uppercase()} WINS"
         }
     }
 }
